@@ -140,19 +140,19 @@ bpwatch start clear_old_venvs
 bpwatch stop clear_old_venvs
 
 # Restore old artifacts from the cache.
-bpwatch start restore_cache
-    mkdir -p .heroku
-
-    cp -R $CACHE_DIR/.heroku/python .heroku/ &> /dev/null || true
-    cp -R $CACHE_DIR/.heroku/python-stack .heroku/ &> /dev/null || true
-    cp -R $CACHE_DIR/.heroku/python-version .heroku/ &> /dev/null || true
-    cp -R $CACHE_DIR/.heroku/vendor .heroku/ &> /dev/null || true
-    cp -R $CACHE_DIR/.heroku/venv .heroku/ &> /dev/null || true
-    if [[ -d $CACHE_DIR/.heroku/src ]]; then
-      cp -R $CACHE_DIR/.heroku/src .heroku/ &> /dev/null || true
-    fi
-
-bpwatch stop restore_cache
+#bpwatch start restore_cache
+#    mkdir -p .heroku
+#
+#    cp -R $CACHE_DIR/.heroku/python .heroku/ &> /dev/null || true
+#    cp -R $CACHE_DIR/.heroku/python-stack .heroku/ &> /dev/null || true
+#    cp -R $CACHE_DIR/.heroku/python-version .heroku/ &> /dev/null || true
+#    cp -R $CACHE_DIR/.heroku/vendor .heroku/ &> /dev/null || true
+#    cp -R $CACHE_DIR/.heroku/venv .heroku/ &> /dev/null || true
+#    if [[ -d $CACHE_DIR/.heroku/src ]]; then
+#      cp -R $CACHE_DIR/.heroku/src .heroku/ &> /dev/null || true
+#    fi
+#
+#bpwatch stop restore_cache
 
 mkdir -p $(dirname $PROFILE_PATH)
 mkdir -p /app/.heroku/src
@@ -229,26 +229,26 @@ find .heroku/python/lib-python/*/site-packages/  -name "*.pth" -print0 2> /dev/n
 set -e
 
 # Store new artifacts in cache.
-bpwatch start dump_cache
-
-  rm -rf $CACHE_DIR/.heroku/python
-  rm -rf $CACHE_DIR/.heroku/python-version
-  rm -rf $CACHE_DIR/.heroku/python-stack
-  rm -rf $CACHE_DIR/.heroku/vendor
-  rm -rf $CACHE_DIR/.heroku/venv
-  rm -rf $CACHE_DIR/.heroku/src
-
-  mkdir -p $CACHE_DIR/.heroku
-  cp -R .heroku/python $CACHE_DIR/.heroku/
-  cp -R .heroku/python-version $CACHE_DIR/.heroku/
-  cp -R .heroku/python-stack $CACHE_DIR/.heroku/ &> /dev/null || true
-  cp -R .heroku/vendor $CACHE_DIR/.heroku/ &> /dev/null || true
-  cp -R .heroku/venv $CACHE_DIR/.heroku/ &> /dev/null || true
-  if [[ -d .heroku/src ]]; then
-    cp -R .heroku/src $CACHE_DIR/.heroku/ &> /dev/null || true
-  fi
-
-bpwatch stop dump_cache
+#bpwatch start dump_cache
+#
+#  rm -rf $CACHE_DIR/.heroku/python
+#  rm -rf $CACHE_DIR/.heroku/python-version
+#  rm -rf $CACHE_DIR/.heroku/python-stack
+#  rm -rf $CACHE_DIR/.heroku/vendor
+#  rm -rf $CACHE_DIR/.heroku/venv
+#  rm -rf $CACHE_DIR/.heroku/src
+#
+#  mkdir -p $CACHE_DIR/.heroku
+#  cp -R .heroku/python $CACHE_DIR/.heroku/
+#  cp -R .heroku/python-version $CACHE_DIR/.heroku/
+#  cp -R .heroku/python-stack $CACHE_DIR/.heroku/ &> /dev/null || true
+#  cp -R .heroku/vendor $CACHE_DIR/.heroku/ &> /dev/null || true
+#  cp -R .heroku/venv $CACHE_DIR/.heroku/ &> /dev/null || true
+#  if [[ -d .heroku/src ]]; then
+#    cp -R .heroku/src $CACHE_DIR/.heroku/ &> /dev/null || true
+#  fi
+#
+#bpwatch stop dump_cache
 
 # Fin.
 bpwatch stop compile
